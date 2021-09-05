@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\ReportController;
+use App\Http\Controllers\MessageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,5 +31,11 @@ Route::group(['prefix' => 'customers','middleware' => 'auth:api'], function () {
 
 Route::post('/reports', [ReportController::class, 'store'])->middleware('auth:api');
 
-// TODO MESSAGES
+// TODO TESTING
+Route::group(['prefix' => 'messages','middleware' => 'auth:api'], function () {
+    Route::get('/', [MessagesController::class, 'index']);
+    Route::post('/', [MessagesController::class, 'store']);
+    Route::get('/{messages}', [MessagesController::class, 'show']);
+    Route::get('/all', [MessagesController::class, 'all'])->middleware('scope:view-all-chat');
+});
 
