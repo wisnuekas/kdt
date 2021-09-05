@@ -23,13 +23,12 @@ Route::group(['prefix' => 'auth'], function () {
     Route::post('logout', [AuthController::class, 'logout'])->middleware('auth:api');
 });
 
-Route::group([
-    'prefix' => 'customers',
-    'middleware' => ['auth:api', 'scopes:see-customers,delete-customers'],
-], function () {
-    Route::get('/', [CustomerController::class, 'index']);
-    Route::delete('/delete/{id}', [CustomerController::class, 'destroy']);
+Route::group(['prefix' => 'customers','middleware' => 'auth:api'], function () {
+    Route::get('/', [CustomerController::class, 'index'])->middleware('scope:see-customers');
+    Route::delete('/delete/{id}', [CustomerController::class, 'destroy'])->middleware('scope:delete-customers');
 });
 
 Route::post('/reports', [ReportController::class, 'store'])->middleware('auth:api');
+
+// TODO MESSAGES
 
