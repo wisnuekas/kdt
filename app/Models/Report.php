@@ -8,4 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class Report extends Model
 {
     use HasFactory;
+
+    protected $fillable = ['content', 'created_by', 'user_id'];
 }

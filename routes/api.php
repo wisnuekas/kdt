@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\ReportController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,4 +30,6 @@ Route::group([
     Route::get('/', [CustomerController::class, 'index']);
     Route::delete('/delete/{id}', [CustomerController::class, 'destroy']);
 });
+
+Route::post('/reports', [ReportController::class, 'store'])->middleware('auth:api');
 

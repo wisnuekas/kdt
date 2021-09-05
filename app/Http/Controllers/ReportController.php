@@ -35,7 +35,29 @@ class ReportController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try {
+            $validated = $request->validate([
+                'content' => 'required|max:255',
+            ]);
+
+            $user = auth()->user();
+
+            Report::create([
+                'content' => $request->content,
+                'user_id' => $request->user_id,
+                'created_by' => $user->id
+            ]);
+
+            return response()->json([
+                "message" => "Thank you for reporting"
+            ], 201);
+
+        } catch (\Throwable $th) {
+            return response()->json([
+                "message" => "Something went wrong please contact administrator",
+                "error" => $th->getMessage()
+            ], 500);
+        }
     }
 
     /**
