@@ -7,7 +7,7 @@ There are several prerequisite apps/packages before making this project, such as
 
 Next steps are:
 
-1. From terminal run the command to clone repo : "https://github.com/ivanrivaldi191/keda_interview.git"
+1. From terminal run the command to clone repo
 2. Move to the cloned repo
 3. Composer install or update
 4. Open the project with a text editor Identify
